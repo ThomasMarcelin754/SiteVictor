@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
-  apiVersion: "2024-04-10",
-});
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "");
 
 export async function POST(req: NextRequest) {
   try {
@@ -13,7 +11,15 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Panier vide" }, { status: 400 });
     }
 
-    const line_items = cart.map((item: any) => ({
+    // Utilisation du type CartItem
+    type CartItem = {
+      id: string;
+      name: string;
+      price: number;
+      image?: string;
+      quantity: number;
+    };
+    const line_items = (cart as CartItem[]).map((item) => ({
       price_data: {
         currency: "eur",
         product_data: {
@@ -33,7 +39,10 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ url: session.url });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error) {
+    if (error instanceof Error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+    return NextResponse.json({ error: "Erreur inconnue" }, { status: 500 });
   }
 }

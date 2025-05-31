@@ -22,8 +22,9 @@ export default function CheckoutPage() {
       } else {
         setError(data.error || "Erreur inconnue");
       }
-    } catch (e: any) {
-      setError(e.message);
+    } catch (e) {
+      if (e instanceof Error) setError(e.message);
+      else setError("Erreur inconnue");
     } finally {
       setLoading(false);
     }

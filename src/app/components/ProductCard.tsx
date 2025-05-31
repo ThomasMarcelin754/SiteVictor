@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Image from "next/image";
 import { useCart } from "../context/CartContext";
 
 type Product = {
@@ -24,7 +25,7 @@ const ProductCard = ({ product }: { product: Product }) => {
     <div className="bg-white rounded-lg shadow p-6 flex flex-col items-center relative">
       <div className="w-24 h-24 bg-gray-200 rounded mb-4 flex items-center justify-center text-gray-400">
         {product.image ? (
-          <img src={product.image} alt={product.name} className="w-full h-full object-cover rounded" />
+          <Image src={product.image} alt={product.name} width={96} height={96} className="w-full h-full object-cover rounded" />
         ) : (
           "Image"
         )}
