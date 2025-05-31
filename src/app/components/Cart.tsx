@@ -49,7 +49,7 @@ const Cart = () => {
                 </div>
               </div>
             ))}
-            <div className="flex justify-between items-center mt-8">
+            <div className="flex justify-between items-center mt-8 gap-4 flex-wrap">
               <div className="font-bold text-xl">Total : {total.toFixed(2)} €</div>
               <button
                 className="bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition"
@@ -57,6 +57,12 @@ const Cart = () => {
               >
                 Vider le panier
               </button>
+              <a
+                href="/checkout"
+                className="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 transition text-center"
+              >
+                Payer
+              </a>
             </div>
           </div>
         )}

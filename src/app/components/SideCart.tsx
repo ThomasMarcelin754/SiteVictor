@@ -73,14 +73,21 @@ const SideCart = () => {
             <span className="font-bold">{total.toFixed(2)} €</span>
           </div>
           <button
-            className="w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition"
+            className="w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition mb-2"
             onClick={clearCart}
           >
             Vider le panier
           </button>
           <Link
+            href="/checkout"
+            className="block w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition text-center mb-2"
+            onClick={() => setOpen(false)}
+          >
+            Payer
+          </Link>
+          <Link
             href="/cart"
-            className="block mt-4 text-center text-black underline hover:text-gray-800"
+            className="block text-center text-black underline hover:text-gray-800"
             onClick={() => setOpen(false)}
           >
             Voir le panier détaillé
